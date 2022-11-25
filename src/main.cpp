@@ -4,6 +4,7 @@
 #include "RTClib.h"
 #include "SPI.h"
 
+// Test to check if GitHub works 
 
 bool debug = 1;
 
