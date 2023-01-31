@@ -13,7 +13,6 @@ RTC_DS1307 rtc;
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 const int LED = 13;
-const int Out = 12;
 unsigned int OutOn = 0;
 unsigned int WzSunrise;
 unsigned int WzSunset;
@@ -35,7 +34,7 @@ float voltage;
 //- §§§ eggLight PWM §§§
 
 int freq = 5000;
-int eggLightChannel = 11;
+int eggLightChannel =6;
 bool eggLightStatus;
 int eggLightValue;
 int eggLightValueMax = 255;
@@ -60,8 +59,8 @@ void eggLightDimmer ();
 void eggLightSwitch ();
 
 void setup() {
-if (debug) Serial.begin(9600);
-
+Serial.begin(9600);
+delay(500);
 pinMode(LED, OUTPUT);
 pinMode(eggLightChannel,OUTPUT);
 
@@ -87,21 +86,28 @@ pinMode(eggLightChannel,OUTPUT);
 
   // When time needs to be re-set on a previously configured device, the
   // following line sets the RTC to the date & time this sketch was compiled
-  //  rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+  //   rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   // This line sets the RTC with an explicit date & time, for example to set
   // January 21, 2014 at 3am you would call:
   // rtc.adjust(DateTime(2022, 11, 13, 22, 25, 0));
 
 RTCtimer ();
+delay(100);
 Sunrise ();
+delay(100);
 eggLightDimmer ();
+delay(100);
 eggLightSwitch ();
+delay(100);
 
 analogWrite(eggLightChannel, 255);
+analogWrite(LED, 255);
 delay(2000);
 analogWrite(eggLightChannel, 125);
+analogWrite(LED, 125);
 delay(2000);
 analogWrite(eggLightChannel, LOW);
+analogWrite(LED, LOW);
 delay(1000);
 
 
